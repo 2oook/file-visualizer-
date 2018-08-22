@@ -108,8 +108,12 @@ public class Visualize_files extends Application
                 
                 
                 DrawSmth drow_obj = new DrawSmth();
+                
+                double[] crd1 = drow_obj.draw(gc, x1, y1, 0, 99);
+                double[] crd2 = drow_obj.draw(gc, crd1[0], crd1[1], 2*Math.PI/3, 99);
+                double[] crd3 = drow_obj.draw(gc, crd2[0], crd2[1], 4*Math.PI/3, 99);
                 //здесь будет вызов интерпретатора.....
-                for ( i = 0; i < 1000; i++) 
+                /*for ( i = 0; i < 1000; i++) 
                 {
                     if(i%2 == 0)
                     {
@@ -135,7 +139,7 @@ public class Visualize_files extends Application
                     
                     
                     
-                }
+                }*/
                 
                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }

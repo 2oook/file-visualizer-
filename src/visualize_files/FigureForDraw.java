@@ -12,5 +12,5 @@ import javafx.scene.canvas.GraphicsContext;
  * @author iblow
  */
 public interface FigureForDraw {
-    void draw(GraphicsContext gc,double x1,double y1,double x2,double y2);
+    double[] draw(GraphicsContext gc,double x1,double y1,double x2,double y2);
 }
