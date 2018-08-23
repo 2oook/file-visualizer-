@@ -13,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.canvas.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -37,6 +38,34 @@ public class Visualize_files extends Application
         
         Button clear_btn = new Button();
         clear_btn.setText("Clear plate");
+        
+        Button chg_depth_btn = new Button();
+        chg_depth_btn.setText("Set depth");
+        
+        TextField chg_depth_tf = new TextField();
+        
+        
+        
+        
+        chg_depth_btn.setOnAction(new EventHandler<ActionEvent>() 
+        {
+            
+            @Override
+            public void handle(ActionEvent event) 
+            {
+                //if(chg_depth_tf.getText())
+                {
+                    
+                    int p = Integer.parseInt(chg_depth_tf.getText());
+                        
+                    System.out.println(chg_depth_tf.getText() + " ");
+                    
+                    DrawSmth.change_depth(p);
+                }
+  
+                
+            }
+        });
         
         clear_btn.setOnAction(new EventHandler<ActionEvent>() 
         {
@@ -152,7 +181,7 @@ public class Visualize_files extends Application
         
 
         
-        root.getChildren().addAll(vizual_canvas, btn, clear_btn);
+        root.getChildren().addAll(vizual_canvas, btn, clear_btn, chg_depth_btn,chg_depth_tf);
         
 
         

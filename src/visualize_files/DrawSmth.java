@@ -14,7 +14,7 @@ import javafx.scene.canvas.GraphicsContext;
 public class DrawSmth implements FigureForDraw 
 {
     static private GraphicsContext gc;
-    private int depth_of_rec = 2;
+    static private int depth_of_rec = 1;
     //static private double delta_w = 0; 
     //static private double delta_h = 0;
     
@@ -56,8 +56,8 @@ public class DrawSmth implements FigureForDraw
             
             
             double coords2[] = DrawSmth.draw_star_rec(depth - 1, x1, y1, angle, length/3);
-            double coords3[] = DrawSmth.draw_star_rec(depth - 1, coords2[0], coords2[1], angle - 1.0472, length/3);
-            double coords4[] = DrawSmth.draw_star_rec(depth - 1, coords3[0], coords3[1], angle + 1.0472, length/3);
+            double coords3[] = DrawSmth.draw_star_rec(depth - 1, coords2[0], coords2[1], angle - Math.PI/2, length/3);
+            double coords4[] = DrawSmth.draw_star_rec(depth - 1, coords3[0], coords3[1], angle + Math.PI/2, length/3);
             double coords5[] = DrawSmth.draw_star_rec(depth - 1, coords4[0], coords4[1], angle, length/3);
             
             return coords5;
@@ -80,6 +80,11 @@ public class DrawSmth implements FigureForDraw
         System.out.println(res[0] + " " + res[1]);
         
         return res;
+    }
+    
+    static void change_depth (int p)
+    {
+        depth_of_rec = p;
     }
     
     
