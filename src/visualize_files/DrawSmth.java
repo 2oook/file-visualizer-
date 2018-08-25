@@ -14,7 +14,11 @@ import javafx.scene.canvas.GraphicsContext;
 public class DrawSmth implements FigureForDraw 
 {
     static private GraphicsContext gc;
-    static private int depth_of_rec = 1;
+    static private int depth_of_rec = 0;
+    static private int length_divider = 3;
+    static private int rad_angle = 3;
+    
+    
     //static private double delta_w = 0; 
     //static private double delta_h = 0;
     
@@ -55,10 +59,10 @@ public class DrawSmth implements FigureForDraw
         {
             
             
-            double coords2[] = DrawSmth.draw_star_rec(depth - 1, x1, y1, angle, length/3);
-            double coords3[] = DrawSmth.draw_star_rec(depth - 1, coords2[0], coords2[1], angle - Math.PI/2, length/3);
-            double coords4[] = DrawSmth.draw_star_rec(depth - 1, coords3[0], coords3[1], angle + Math.PI/2, length/3);
-            double coords5[] = DrawSmth.draw_star_rec(depth - 1, coords4[0], coords4[1], angle, length/3);
+            double coords2[] = DrawSmth.draw_star_rec(depth - 1, x1, y1, angle, length / length_divider);
+            double coords3[] = DrawSmth.draw_star_rec(depth - 1, coords2[0], coords2[1], angle - Math.PI / rad_angle, length / length_divider);
+            double coords4[] = DrawSmth.draw_star_rec(depth - 1, coords3[0], coords3[1], angle + Math.PI / rad_angle, length / length_divider);
+            double coords5[] = DrawSmth.draw_star_rec(depth - 1, coords4[0], coords4[1], angle, length / length_divider);
             
             return coords5;
         }

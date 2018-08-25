@@ -27,7 +27,7 @@ public class Visualize_files extends Application
     GraphicsContext gc;
     double canvas_w = 500;
     double canvas_h = 500;
-    double x1 = canvas_w/2, x2 = canvas_w/2, y1 = canvas_h/2, y2 = canvas_h/2;
+    double x1 = canvas_w-400, x2 = canvas_w-400, y1 = canvas_h-400, y2 = canvas_h-400;
     int i = 0;
     
     @Override
@@ -76,8 +76,8 @@ public class Visualize_files extends Application
                 gc.clearRect(0,0, canvas_w,canvas_h);
                 
                 
-                x1 = x2 = canvas_w/2;
-                y1 = y2 = canvas_h/2;
+                x1 = x2 = canvas_w-400;
+                y1 = y2 = canvas_h-400;
                 
                 
                 
@@ -141,6 +141,9 @@ public class Visualize_files extends Application
                 double[] crd1 = drow_obj.draw(gc, x1, y1, 0, 99);
                 double[] crd2 = drow_obj.draw(gc, crd1[0], crd1[1], 2*Math.PI/3, 99);
                 double[] crd3 = drow_obj.draw(gc, crd2[0], crd2[1], 4*Math.PI/3, 99);
+                //double[] crd4 = drow_obj.draw(gc, crd3[0], crd3[1], 6*Math.PI/6, 99);
+                //double[] crd5 = drow_obj.draw(gc, crd4[0], crd4[1], 8*Math.PI/6, 99);
+                //double[] crd6 = drow_obj.draw(gc, crd5[0], crd5[1], 10*Math.PI/6, 99);
                 //здесь будет вызов интерпретатора.....
                 /*for ( i = 0; i < 1000; i++) 
                 {
