@@ -5,7 +5,9 @@
  */
 package visualize_files;
 
+
 import javafx.scene.canvas.GraphicsContext;
+
 
 /**
  *
@@ -18,32 +20,26 @@ public class DrawSmth implements FigureForDraw
     static private int length_divider = 3;
     static private int rad_angle = 3;
     
-    
-    //static private double delta_w = 0; 
-    //static private double delta_h = 0;
+
     
     @Override
-    public double[] draw( GraphicsContext gc, double x1, double y1, double angle, double length) 
+    public void draw( GraphicsContext gc, double x1, double y1, double angle, double length) 
     {
         this.gc = gc;
-        //this.delta_w = delta_w;
-        //this.delta_h = delta_h;
         
-        double[] further_coords = DrawSmth.draw_star_rec(depth_of_rec, x1, y1, angle, length);
-        //gc.strokeLine(x1, y1, x2, y2);
-        //gc.fillOval(x1, y1, x2, y2);
+        double[] crd1 = DrawSmth.draw_star_rec(depth_of_rec, x1, y1, angle, length);
+        double[] crd2 = DrawSmth.draw_star_rec(depth_of_rec, crd1[0], crd1[1], 2*Math.PI/3, 99);
+        double[] crd3 = DrawSmth.draw_star_rec(depth_of_rec, crd2[0], crd2[1], 4*Math.PI/3, 99);
         
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        return further_coords;
+
     }
     
-    private static double[] draw_star_rec(int depth, double x1,  double y1, double angle, double length)
+    private static double[] draw_star_rec(int depth, double x1,  double y1, double angle, double length)//рекурсивный метод отрисовки фигур
     {
         if(depth == 0)
         {
-            double[] coords = DrawSmth.coord_prep(angle, length);
-            coords[0] = x1+coords[0];
-            coords[1] = y1+coords[1];
+            double[] coords = DrawSmth.coord_prep(angle, length, x1, y1); //подготовка (вычисление) координат конца отрезка
+
             
             System.out.println("Before stroke line");
             System.out.println(x1 + " " + y1);
@@ -68,7 +64,7 @@ public class DrawSmth implements FigureForDraw
         }
     }
     
-    private static double[] coord_prep(double angle, double length)
+    private static double[] coord_prep(double angle, double length, double x1, double y1)
     {
         double[] res = {0.0, 0.0}; 
         
@@ -78,8 +74,8 @@ public class DrawSmth implements FigureForDraw
         System.out.println(x + " " + y);
         
         
-        res[0] = x;
-        res[1] = y;
+        res[0] = x1+x;
+        res[1] = y1+y;
         
         System.out.println(res[0] + " " + res[1]);
         

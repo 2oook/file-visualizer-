@@ -18,10 +18,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-/**
- *
- * @author iblow
- */
+
 public class Visualize_files extends Application 
 {
     GraphicsContext gc;
@@ -134,61 +131,23 @@ public class Visualize_files extends Application
             @Override
             public void handle(Event event) 
             {
-                
+                gc.setStroke(Color.RED);
                 
                 DrawSmth drow_obj = new DrawSmth();
                 
-                double[] crd1 = drow_obj.draw(gc, x1, y1, 0, 99);
-                double[] crd2 = drow_obj.draw(gc, crd1[0], crd1[1], 2*Math.PI/3, 99);
-                double[] crd3 = drow_obj.draw(gc, crd2[0], crd2[1], 4*Math.PI/3, 99);
-                //double[] crd4 = drow_obj.draw(gc, crd3[0], crd3[1], 6*Math.PI/6, 99);
-                //double[] crd5 = drow_obj.draw(gc, crd4[0], crd4[1], 8*Math.PI/6, 99);
-                //double[] crd6 = drow_obj.draw(gc, crd5[0], crd5[1], 10*Math.PI/6, 99);
-                //здесь будет вызов интерпретатора.....
-                /*for ( i = 0; i < 1000; i++) 
-                {
-                    if(i%2 == 0)
-                    {
-                        drow_obj.draw(gc, x1, y1, x2+0.02, y2+0.01);
-                        x1 = x1+0.02;
-                        y1 = y1+0.05;
-                        x2 = x2+0.07 * x1;
-                        y2 = y2+0.010 * x2 * Math.sin(x1);
-                        
-                        System.out.println(x1 + " " + y1);
-                    }
-                    else
-                    {
-                        drow_obj.draw(gc, x1, y1, x2+0.01, y2+0.02);
-                        x1 = -x1+0.05;
-                        y1 = -y1+0.02 * Math.sin(x2);
-                        x2 = -x2+0.010 * x2;
-                        y2 = -y2+0.07 * x2;
-                        
-                        System.out.println(x1 + " " + y1);
-                        System.out.println(x2 + " " + y2);
-                    }
-                    
-                    
-                    
-                }*/
+                drow_obj.draw(gc, x1, y1, 0, 99);
                 
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                //здесь будет вызов интерпретатора.....
+
+                
+
             }
         });
-        
-        
-        
-        
-        //gc.strokeLine(0, 0, 500, 400);
         
 
         
         root.getChildren().addAll(vizual_canvas, btn, clear_btn, chg_depth_btn,chg_depth_tf);
-        
-
-        
-        
+    
 
         primaryStage.show();
  
