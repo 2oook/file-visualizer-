@@ -9,7 +9,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 /**
  *
- * @author iblow
+ * @author 2oook
  */
 public interface FigureForDraw {
     void draw(GraphicsContext gc,double x1,double y1,double x2,double y2);

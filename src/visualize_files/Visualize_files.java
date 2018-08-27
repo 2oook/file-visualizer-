@@ -121,7 +121,7 @@ public class Visualize_files extends Application
         Canvas vizual_canvas = new Canvas (canvas_w, canvas_h);
         
         gc = vizual_canvas.getGraphicsContext2D();
-        
+        gc.setLineWidth(2);
         
        
         
@@ -131,7 +131,8 @@ public class Visualize_files extends Application
             @Override
             public void handle(Event event) 
             {
-                gc.setStroke(Color.RED);
+                
+                
                 
                 DrawSmth drow_obj = new DrawSmth();
                 

@@ -7,11 +7,12 @@ package visualize_files;
 
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 
 /**
  *
- * @author iblow
+ * @author 2oook
  */
 public class DrawSmth implements FigureForDraw 
 {
@@ -28,8 +29,8 @@ public class DrawSmth implements FigureForDraw
         this.gc = gc;
         
         double[] crd1 = DrawSmth.draw_star_rec(depth_of_rec, x1, y1, angle, length);
-        double[] crd2 = DrawSmth.draw_star_rec(depth_of_rec, crd1[0], crd1[1], 2*Math.PI/3, 99);
-        double[] crd3 = DrawSmth.draw_star_rec(depth_of_rec, crd2[0], crd2[1], 4*Math.PI/3, 99);
+        double[] crd2 = DrawSmth.draw_star_rec(depth_of_rec, crd1[0], crd1[1], angle + 2*Math.PI/3, 99);
+        double[] crd3 = DrawSmth.draw_star_rec(depth_of_rec, crd2[0], crd2[1], angle + 4*Math.PI/3, 99);
         
 
     }
@@ -45,6 +46,9 @@ public class DrawSmth implements FigureForDraw
             System.out.println(x1 + " " + y1);
             System.out.println(coords[0] + " " + coords[1]);
             
+
+            
+            gc.setStroke(Color.CORNFLOWERBLUE);
             gc.strokeLine(x1, y1, coords[0], coords[1]);
             
             //System.out.println("Coords with delta " + (coords[0]) + " " + (coords[1]));
