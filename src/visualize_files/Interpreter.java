@@ -24,16 +24,22 @@ import javax.swing.JFileChooser;
  *
  * @author 2oook
  */
-public class Interpreter extends Thread
+public class Interpreter //extends Thread
 {
-   
+    
+    Color color;
+    double x1 = 0;
+    double y1 = 0;
+    double angle = 0;
+    double length = 0;
+   /*
     @Override
     public void run()
     {
         GetByte();
     }
-    
-    void  GetByte ()
+    */
+    Interpreter  GetByte ()
     {
 
         JFileChooser fileopen = new JFileChooser();
@@ -56,22 +62,48 @@ public class Interpreter extends Thread
                 do 
                 {
                     temp = opfile.read();
-                    int byte_hash = 0;
+                    
+                    byte[] hash;
 
                     if (temp != -1)
                     {
 
                         //logic of interpretation
                         
-                        //byte_hash = Integer.toString(temp).hashCode();
+                        
                         ByteHash bh = new ByteHash();
                         
-                        bh.byte_hash(temp);
+                        hash = bh.byte_hash(temp);
                         
-                        Color color = Color.rgb (r, g, b);
+                        //получаем цвет
+                        
+                        r = hash[(int)Math.round(Math.random()*32)];
+                        g = hash[(int)Math.round(Math.random()*32)];
+                        b = hash[(int)Math.round(Math.random()*32)];
+                        
+                        color = Color.rgb (r, g, b);
+                        
+                        //получаем координаты
+                        
+                        x1 = (hash[0] * 3.92)/1000;
+                        y1 = (hash[1] * 3.92)/1000;
+                        
+                        //получаем угол
+                        
+                        angle = hash[2] / 100;
+                        
+                        //получаем длину 
+                        
+                        length = hash[3] / 10; 
+                        
+                        
+                        opfile.mark(1);
+ 
 
 
                         System.out.println(temp + " " );
+                        
+                        return this;
                     }
 
                 }
@@ -83,10 +115,13 @@ public class Interpreter extends Thread
             {
                 System.out.println("Can not read file");
             }
+            
         }
         
-		
         
+        return this;
+        
+ 
     }
     
 

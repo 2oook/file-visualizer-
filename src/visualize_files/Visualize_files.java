@@ -92,7 +92,7 @@ public class Visualize_files extends Application
                 
                 
                 Interpreter interpreter = new Interpreter ();
-                
+                /*
                 if (interpreter.isAlive())
                 {
                     interpreter.interrupt();
@@ -100,7 +100,7 @@ public class Visualize_files extends Application
                 else
                 {
                     interpreter.start();
-                }
+                }*/
                
                 
                 
