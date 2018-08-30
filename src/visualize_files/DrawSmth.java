@@ -14,24 +14,27 @@ import javafx.scene.paint.Color;
  *
  * @author 2oook
  */
-public class DrawSmth implements FigureForDraw 
+public class DrawSmth implements FigureForDraw
 {
     static private GraphicsContext gc;
     static private int depth_of_rec = 0;
     static private int length_divider = 3;
     static private int rad_angle = 3;
     
+    DrawSmth(GraphicsContext gc)
+    {
+        this.gc = gc;
+    }
+    
 
     
     @Override
-    public void draw( GraphicsContext gc, double x1, double y1, double angle, double length) 
+    public void draw(double x1, double y1, double angle, double length, Color color) 
     {
-        this.gc = gc;
         
         double[] crd1 = DrawSmth.draw_star_rec(depth_of_rec, x1, y1, angle, length);
         double[] crd2 = DrawSmth.draw_star_rec(depth_of_rec, crd1[0], crd1[1], angle + 2*Math.PI/3, 99);
-        double[] crd3 = DrawSmth.draw_star_rec(depth_of_rec, crd2[0], crd2[1], angle + 4*Math.PI/3, 99);
-        
+        double[] crd3 = DrawSmth.draw_star_rec(depth_of_rec, crd2[0], crd2[1], angle + 4*Math.PI/3, 99);   
 
     }
     

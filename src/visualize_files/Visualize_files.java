@@ -51,15 +51,13 @@ public class Visualize_files extends Application
             public void handle(ActionEvent event) 
             {
                 //if(chg_depth_tf.getText())
-                {
                     
-                    int p = Integer.parseInt(chg_depth_tf.getText());
-                        
-                    System.out.println(chg_depth_tf.getText() + " ");
-                    
-                    DrawSmth.change_depth(p);
-                }
-  
+                int p = Integer.parseInt(chg_depth_tf.getText());
+
+                System.out.println(chg_depth_tf.getText() + " ");
+
+                DrawSmth.change_depth(p);
+ 
                 
             }
         });
@@ -92,10 +90,26 @@ public class Visualize_files extends Application
                 
                 
                 Interpreter interpreter = new Interpreter ();
-                /*
-                if (interpreter.isAlive())
+                
+                interpreter.start();
+                
+                DrawSmth drow_obj = new DrawSmth(gc);
+               
+                int i= 1000;
+                do
+                {
+                drow_obj.draw(interpreter.x1, interpreter.y1, interpreter.angle, interpreter.length, interpreter.color);
+                
+                interpreter.notify();
+                
+                }
+                while(--i > 0);
+
+                
+                /*if (interpreter.isAlive())
                 {
                     interpreter.interrupt();
+                    System.out.println("Thread interrupted");
                 }   
                 else
                 {
@@ -134,9 +148,9 @@ public class Visualize_files extends Application
                 
                 
                 
-                DrawSmth drow_obj = new DrawSmth();
+                DrawSmth drow_obj = new DrawSmth(gc);
                 
-                drow_obj.draw(gc, x1, y1, 0, 99);
+                //drow_obj.draw(gc, x1, y1, 0, 99, Color);
                 
                 //здесь будет вызов интерпретатора.....
 

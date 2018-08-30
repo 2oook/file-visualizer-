@@ -24,7 +24,7 @@ import javax.swing.JFileChooser;
  *
  * @author 2oook
  */
-public class Interpreter //extends Thread
+public class Interpreter extends Thread
 {
     
     Color color;
@@ -32,14 +32,14 @@ public class Interpreter //extends Thread
     double y1 = 0;
     double angle = 0;
     double length = 0;
-   /*
+   
     @Override
     public void run()
     {
         GetByte();
     }
-    */
-    Interpreter  GetByte ()
+    
+    private synchronized void  GetByte ()
     {
 
         JFileChooser fileopen = new JFileChooser();
@@ -77,9 +77,9 @@ public class Interpreter //extends Thread
                         
                         //получаем цвет
                         
-                        r = hash[(int)Math.round(Math.random()*32)];
-                        g = hash[(int)Math.round(Math.random()*32)];
-                        b = hash[(int)Math.round(Math.random()*32)];
+                        r = Math.abs(hash[(int)Math.round(Math.random()*31)]);
+                        g = Math.abs(hash[(int)Math.round(Math.random()*31)]);
+                        b = Math.abs(hash[(int)Math.round(Math.random()*31)]);
                         
                         color = Color.rgb (r, g, b);
                         
@@ -95,15 +95,25 @@ public class Interpreter //extends Thread
                         //получаем длину 
                         
                         length = hash[3] / 10; 
-                        
-                        
-                        opfile.mark(1);
+
  
 
 
                         System.out.println(temp + " " );
                         
-                        return this;
+                        //вызов метода передающего параметры 
+                        
+                        send_params();
+                        
+                        try 
+                        {
+                            Interpreter.sleep(10000);
+                        } 
+                        catch (InterruptedException ex) 
+                        {
+                            Logger.getLogger(Interpreter.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        
                     }
 
                 }
@@ -117,13 +127,13 @@ public class Interpreter //extends Thread
             }
             
         }
-        
-        
-        return this;
-        
- 
     }
     
+    private Interpreter send_params()
+    {
+        
+        return  this;
+    };
 
 }
 

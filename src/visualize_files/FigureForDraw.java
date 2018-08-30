@@ -6,11 +6,12 @@
 package visualize_files;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /**
  *
  * @author 2oook
  */
 public interface FigureForDraw {
-    void draw(GraphicsContext gc,double x1,double y1,double x2,double y2);
+    void draw(double x1,double y1,double x2,double y2, Color color);
 }
