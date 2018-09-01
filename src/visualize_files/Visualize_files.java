@@ -5,6 +5,8 @@
  */
 package visualize_files;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -28,7 +30,7 @@ public class Visualize_files extends Application
     int i = 0;
     
     @Override
-    public void start(Stage primaryStage) {
+    public synchronized void start(Stage primaryStage) {
         
         Button btn = new Button();
         btn.setText("Choose file");
@@ -88,35 +90,9 @@ public class Visualize_files extends Application
             public void handle(ActionEvent event) 
             {
                 
+                FileChooseHandler.handle_file(gc);
                 
-                Interpreter interpreter = new Interpreter ();
-                
-                interpreter.start();
-                
-                DrawSmth drow_obj = new DrawSmth(gc);
-               
-                int i= 1000;
-                do
-                {
-                drow_obj.draw(interpreter.x1, interpreter.y1, interpreter.angle, interpreter.length, interpreter.color);
-                
-                interpreter.notify();
-                
-                }
-                while(--i > 0);
-
-                
-                /*if (interpreter.isAlive())
-                {
-                    interpreter.interrupt();
-                    System.out.println("Thread interrupted");
-                }   
-                else
-                {
-                    interpreter.start();
-                }*/
-               
-                
+     
                 
             }
         });

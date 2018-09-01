@@ -45,9 +45,9 @@ public class DrawSmth implements FigureForDraw
             double[] coords = DrawSmth.coord_prep(angle, length, x1, y1); //подготовка (вычисление) координат конца отрезка
 
             
-            System.out.println("Before stroke line");
-            System.out.println(x1 + " " + y1);
-            System.out.println(coords[0] + " " + coords[1]);
+            //System.out.println("Before stroke line");
+            //System.out.println(x1 + " " + y1);
+            //System.out.println(coords[0] + " " + coords[1]);
             
 
             
@@ -78,13 +78,13 @@ public class DrawSmth implements FigureForDraw
         double x = Math.sin(angle)*length;
         double y = Math.cos(angle)*length;
         
-        System.out.println(x + " " + y);
+        //System.out.println(x + " " + y);
         
         
         res[0] = x1+x;
         res[1] = y1+y;
         
-        System.out.println(res[0] + " " + res[1]);
+        //System.out.println(res[0] + " " + res[1]);
         
         return res;
     }

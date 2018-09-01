@@ -6,8 +6,7 @@
 package visualize_files;
 
 import java.io.*;
-import java.security.DigestException;
-import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,7 +23,7 @@ import javax.swing.JFileChooser;
  *
  * @author 2oook
  */
-public class Interpreter extends Thread
+class Interpreter extends Thread
 {
     
     Color color;
@@ -32,6 +31,7 @@ public class Interpreter extends Thread
     double y1 = 0;
     double angle = 0;
     double length = 0;
+    Semaphore waiting_for_file = new Semaphore(1);
    
     @Override
     public void run()
@@ -41,6 +41,14 @@ public class Interpreter extends Thread
     
     private synchronized void  GetByte ()
     {
+        try 
+        {
+            waiting_for_file.acquire();//забираем семафор
+        } 
+        catch (InterruptedException ex) 
+        {
+            Logger.getLogger(Interpreter.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         JFileChooser fileopen = new JFileChooser();
         
@@ -85,8 +93,8 @@ public class Interpreter extends Thread
                         
                         //получаем координаты
                         
-                        x1 = (hash[0] * 3.92)/1000;
-                        y1 = (hash[1] * 3.92)/1000;
+                        x1 = Math.abs((hash[0] * 3.92)/1000);
+                        y1 = Math.abs((hash[1] * 3.92)/1000);
                         
                         //получаем угол
                         
@@ -94,7 +102,7 @@ public class Interpreter extends Thread
                         
                         //получаем длину 
                         
-                        length = hash[3] / 10; 
+                        length = Math.abs(hash[3] / 10); 
 
  
 
@@ -105,14 +113,18 @@ public class Interpreter extends Thread
                         
                         send_params();
                         
+                        waiting_for_file.release();//освобождаем семафор
+                        /*
                         try 
                         {
-                            Interpreter.sleep(10000);
+                            System.out.println("Waiting");
+                            wait();
                         } 
                         catch (InterruptedException ex) 
                         {
                             Logger.getLogger(Interpreter.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                        */
                         
                     }
 
