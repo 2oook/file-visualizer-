@@ -17,7 +17,7 @@ import javafx.scene.paint.Color;
 public class DrawSmth implements FigureForDraw
 {
     static private GraphicsContext gc;
-    static private int depth_of_rec = 0;
+    static private int depth_of_rec = 1;
     static private int length_divider = 3;
     static private int rad_angle = 3;
     

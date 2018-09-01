@@ -11,51 +11,71 @@ import javafx.scene.canvas.GraphicsContext;
 
 /**
  *
- * @author iblow
+ * @author 2oook
  */
-public class FileChooseHandler {
-    static synchronized void handle_file(GraphicsContext gc)
+public class FileChooseHandler extends Thread  
+{
+    @Override
+    public void run()
     {
-        Interpreter interpreter = new Interpreter ();
+        handle_file();
+    }
+    
+    synchronized void handle_file()
+    {
+        
                 
-                interpreter.start();
-                
-                DrawSmth drow_obj = new DrawSmth(gc);
-                
-                try 
-                {
-                    interpreter.waiting_for_file.acquire();
-                } 
-                catch (InterruptedException ex) 
-                {
-                    Logger.getLogger(Visualize_files.class.getName()).log(Level.SEVERE, null, ex);
-                }
-               
-                int i= 1000;
-                do
-                {
-                drow_obj.draw(interpreter.x1, interpreter.y1, interpreter.angle, interpreter.length, interpreter.color);
-                
-                
-                
-                interpreter.waiting_for_file.release();
-                
-                //System.out.println("Notifying");
-                
-                //interpreter.notify();
-                
-                }
-                while(--i > 0);
+        DrawSmth drow_obj = new DrawSmth(Visualize_files.gc);
 
-                
-                /*if (interpreter.isAlive())
-                {
-                    interpreter.interrupt();
-                    System.out.println("Thread interrupted");
-                }   
-                else
-                {
-                    interpreter.start();
-                }*/
+        /*try 
+        {
+            interpreter.waiting_for_file.acquire();
+        } 
+        catch (InterruptedException ex) 
+        {
+            Logger.getLogger(Visualize_files.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+
+
+
+
+        int i= 1000;
+        do
+        {
+
+        /*try 
+        {
+            System.out.println("Waiting in FCH");
+            wait();  
+        } 
+        catch (InterruptedException ex) 
+        {
+            Logger.getLogger(FileChooseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+
+        System.out.println("After waiting in FCH");
+        drow_obj.draw(Interpreter.x1, Interpreter.y1, Interpreter.angle, Interpreter.length, Interpreter.color);
+
+
+
+        //interpreter.waiting_for_file.release();
+
+        System.out.println("Notifying in FCH");
+
+        notifyAll();
+
+        }
+        while(--i > 0);
+
+
+        /*if (interpreter.isAlive())
+        {
+            interpreter.interrupt();
+            System.out.println("Thread interrupted");
+        }   
+        else
+        {
+            interpreter.start();
+        }*/
     }
 }

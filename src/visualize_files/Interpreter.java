@@ -26,12 +26,14 @@ import javax.swing.JFileChooser;
 class Interpreter extends Thread
 {
     
-    Color color;
-    double x1 = 0;
-    double y1 = 0;
-    double angle = 0;
-    double length = 0;
-    Semaphore waiting_for_file = new Semaphore(1);
+    
+    
+    static Color color = Color.DEEPPINK;
+    static double x1 = 0;
+    static double y1 = 0;
+    static double angle = 0;
+    static double length = 0;
+    //Semaphore waiting_for_file = new Semaphore(1);
    
     @Override
     public void run()
@@ -41,14 +43,6 @@ class Interpreter extends Thread
     
     private synchronized void  GetByte ()
     {
-        try 
-        {
-            waiting_for_file.acquire();//забираем семафор
-        } 
-        catch (InterruptedException ex) 
-        {
-            Logger.getLogger(Interpreter.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
         JFileChooser fileopen = new JFileChooser();
         
@@ -75,6 +69,19 @@ class Interpreter extends Thread
 
                     if (temp != -1)
                     {
+
+                        
+                        /*try 
+                        {
+                            waiting_for_file.acquire();//забираем семафор
+                        } 
+                        catch (InterruptedException ex) 
+                        {
+                            Logger.getLogger(Interpreter.class.getName()).log(Level.SEVERE, null, ex);
+                        }*/
+                        System.out.println("Notifying in iterpreter");
+                        
+                        
 
                         //logic of interpretation
                         
@@ -111,20 +118,24 @@ class Interpreter extends Thread
                         
                         //вызов метода передающего параметры 
                         
-                        send_params();
+                        //send_params();
                         
-                        waiting_for_file.release();//освобождаем семафор
-                        /*
+                        //waiting_for_file.release();//освобождаем семафор
+                        
+                        notifyAll();
+                        
                         try 
                         {
-                            System.out.println("Waiting");
+                            System.out.println("Waiting in interpreter");
                             wait();
                         } 
                         catch (InterruptedException ex) 
                         {
                             Logger.getLogger(Interpreter.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        */
+                        
+                        
+                        
                         
                     }
 
@@ -141,11 +152,11 @@ class Interpreter extends Thread
         }
     }
     
-    private Interpreter send_params()
+    /*private Interpreter send_params()
     {
         
         return  this;
-    };
+    };*/
 
 }
 

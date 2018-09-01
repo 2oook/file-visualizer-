@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 
 public class Visualize_files extends Application 
 {
-    GraphicsContext gc;
+    static GraphicsContext gc;
     double canvas_w = 500;
     double canvas_h = 500;
     double x1 = canvas_w-400, x2 = canvas_w-400, y1 = canvas_h-400, y2 = canvas_h-400;
@@ -89,8 +89,15 @@ public class Visualize_files extends Application
             @Override
             public void handle(ActionEvent event) 
             {
+                Interpreter interpreter = new Interpreter();
                 
-                FileChooseHandler.handle_file(gc);
+                interpreter.start();
+                         
+                FileChooseHandler fch = new FileChooseHandler();
+                
+                fch.start();
+                
+                
                 
      
                 
