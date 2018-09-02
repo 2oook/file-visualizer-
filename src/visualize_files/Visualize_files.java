@@ -89,18 +89,13 @@ public class Visualize_files extends Application
             @Override
             public void handle(ActionEvent event) 
             {
-                Interpreter interpreter = new Interpreter();
+                Monitor monitor = new Monitor();
                 
-                interpreter.start();
-                         
-                FileChooseHandler fch = new FileChooseHandler();
+                Interpreter interpreter = new Interpreter(monitor);
+        
+                FileChooseHandler fch = new FileChooseHandler(monitor);
                 
-                fch.start();
-                
-                
-                
-     
-                
+      
             }
         });
         

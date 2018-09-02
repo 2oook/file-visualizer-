@@ -23,8 +23,17 @@ import javax.swing.JFileChooser;
  *
  * @author 2oook
  */
-class Interpreter extends Thread
+class Interpreter implements Runnable
 {
+    Monitor monitor;
+    
+    Interpreter(Monitor monitor)
+    {
+        Thread interpreter_thread = new Thread(this);      
+        interpreter_thread.start();
+        this.monitor = monitor;
+    }
+    
     
     
     
@@ -33,15 +42,15 @@ class Interpreter extends Thread
     static double y1 = 0;
     static double angle = 0;
     static double length = 0;
-    //Semaphore waiting_for_file = new Semaphore(1);
-   
+
+
     @Override
     public void run()
     {
-        GetByte();
+        GetByte();  
     }
     
-    private synchronized void  GetByte ()
+    synchronized void  GetByte ()
     {
 
         JFileChooser fileopen = new JFileChooser();
@@ -70,18 +79,7 @@ class Interpreter extends Thread
                     if (temp != -1)
                     {
 
-                        
-                        /*try 
-                        {
-                            waiting_for_file.acquire();//забираем семафор
-                        } 
-                        catch (InterruptedException ex) 
-                        {
-                            Logger.getLogger(Interpreter.class.getName()).log(Level.SEVERE, null, ex);
-                        }*/
-                        System.out.println("Notifying in iterpreter");
-                        
-                        
+                    
 
                         //logic of interpretation
                         
@@ -96,12 +94,16 @@ class Interpreter extends Thread
                         g = Math.abs(hash[(int)Math.round(Math.random()*31)]);
                         b = Math.abs(hash[(int)Math.round(Math.random()*31)]);
                         
+                        System.out.println("R " + r);
+                        System.out.println("G " + g);
+                        System.out.println("B " + r);
+                        
                         color = Color.rgb (r, g, b);
                         
                         //получаем координаты
                         
-                        x1 = Math.abs((hash[0] * 3.92)/1000);
-                        y1 = Math.abs((hash[1] * 3.92)/1000);
+                        x1 = Math.abs((hash[0] * 3.92)/1);
+                        y1 = Math.abs((hash[1] * 3.92)/1);
                         
                         //получаем угол
                         
@@ -109,7 +111,7 @@ class Interpreter extends Thread
                         
                         //получаем длину 
                         
-                        length = Math.abs(hash[3] / 10); 
+                        length = Math.abs(hash[3] / 7); 
 
  
 
@@ -118,13 +120,14 @@ class Interpreter extends Thread
                         
                         //вызов метода передающего параметры 
                         
-                        //send_params();
                         
-                        //waiting_for_file.release();//освобождаем семафор
+                        //System.out.println("Notifying in interpreter");
+
+                        monitor.get_params();
                         
-                        notifyAll();
+                        //notify();
                         
-                        try 
+                        /*try 
                         {
                             System.out.println("Waiting in interpreter");
                             wait();
@@ -132,10 +135,7 @@ class Interpreter extends Thread
                         catch (InterruptedException ex) 
                         {
                             Logger.getLogger(Interpreter.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        
-                        
-                        
+                        }*/
                         
                     }
 
@@ -150,13 +150,7 @@ class Interpreter extends Thread
             }
             
         }
-    }
-    
-    /*private Interpreter send_params()
-    {
-        
-        return  this;
-    };*/
+    }  
 
 }
 
