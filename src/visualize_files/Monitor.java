@@ -15,22 +15,23 @@ import javafx.scene.paint.Color;
  */
 public class Monitor {
     
-    static Color color = Color.DEEPPINK;
-    static double x1 = 0;
-    static double y1 = 0;
-    static double angle = 0;
-    static double length = 0;
+    static private Color color = Color.DEEPPINK;
+    static private double x1 = 0;
+    static private double y1 = 0;
+    static private double angle = 0;
+    static private double length = 0;
+    static private int depth_of_rec = 1;
+    static private int length_divider = 3;
+    static private int rad_angle = 3;
     
     DrawSmth drow_obj = new DrawSmth(Visualize_files.gc);
-    
-    private boolean assert_flag = false;
     
     private boolean fields_is_ready = false;
     
     synchronized void get_params()
     {
         fields_is_ready = true;
-        System.out.println("Notifying get_params");
+        System.out.println("Notifying in get_params");
         notify();
         
         color = Interpreter.color;
@@ -38,13 +39,16 @@ public class Monitor {
         y1 = Interpreter.y1;
         angle = Interpreter.angle;
         length = Interpreter.length;
+        depth_of_rec = Interpreter.depth_of_rec;
+        length_divider = Interpreter.length_divider;
+        rad_angle = Interpreter.rad_angle;
         
         
         while(fields_is_ready)
         {
             try 
             {
-                System.out.println("Waiting get_params");
+                System.out.println("Waiting in get_params");
                 wait();
             } 
             catch (InterruptedException ex) 
@@ -73,41 +77,11 @@ public class Monitor {
             
             fields_is_ready = false;
             
-            drow_obj.draw(x1, y1, angle, length, color);
+            drow_obj.draw(x1, y1, angle, length, color, depth_of_rec, length_divider, rad_angle);
             
             System.out.println("Notifying visualize_bytes");
             notify();
 
     }
-    
-    
-    private void do_wait()
-    {
-        if(assert_flag == true){
-            while(assert_flag){
-                try 
-                {
-                    wait();
-                } 
-                catch (InterruptedException ex) 
-                {
-                    Logger.getLogger(Monitor.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-        else
-        {
-           while(!assert_flag){
-                try 
-                {
-                    wait();
-                } 
-                catch (InterruptedException ex) 
-                {
-                    Logger.getLogger(Monitor.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } 
-        }
-        
-    }
+
 }

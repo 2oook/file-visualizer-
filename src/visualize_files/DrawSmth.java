@@ -21,7 +21,7 @@ public class DrawSmth implements FigureForDraw
     static private int length_divider = 3;
     static private int rad_angle = 3;
     
-    //static Color color;
+ 
     
     DrawSmth(GraphicsContext gc)
     {
@@ -31,9 +31,12 @@ public class DrawSmth implements FigureForDraw
 
     
     @Override
-    public void draw(double x1, double y1, double angle, double length, Color color) 
+    public void draw(double x1, double y1, double angle, double length, Color color, int depth_of_rec, int length_divider, int rad_angle) 
     {
-        //this.color = color;
+        this.depth_of_rec = depth_of_rec;
+        this.length_divider = length_divider;
+        this.rad_angle = rad_angle;
+        
         gc.setStroke(color);
         
         double[] crd1 = DrawSmth.draw_star_rec(depth_of_rec, x1, y1, angle, length);
@@ -47,18 +50,10 @@ public class DrawSmth implements FigureForDraw
         if(depth == 0)
         {
             double[] coords = DrawSmth.coord_prep(angle, length, x1, y1); //подготовка (вычисление) координат конца отрезка
-
-            
-            //System.out.println("Before stroke line");
-            //System.out.println(x1 + " " + y1);
-            //System.out.println(coords[0] + " " + coords[1]);
-            
-
-            
             
             gc.strokeLine(x1, y1, coords[0], coords[1]);
             
-            //System.out.println("Coords with delta " + (coords[0]) + " " + (coords[1]));
+            //System.out.println("Coords " + (coords[0]) + " " + (coords[1]));
             
             return coords;
         }

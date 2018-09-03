@@ -5,8 +5,7 @@
  */
 package visualize_files;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -17,7 +16,6 @@ import javafx.scene.canvas.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -94,8 +92,7 @@ public class Visualize_files extends Application
                 Interpreter interpreter = new Interpreter(monitor);
         
                 FileChooseHandler fch = new FileChooseHandler(monitor);
-                
-      
+
             }
         });
         
@@ -113,7 +110,7 @@ public class Visualize_files extends Application
         Canvas vizual_canvas = new Canvas (canvas_w, canvas_h);
         
         gc = vizual_canvas.getGraphicsContext2D();
-        gc.setLineWidth(2);
+        //gc.setLineWidth(1);
         
        
         
@@ -123,16 +120,8 @@ public class Visualize_files extends Application
             @Override
             public void handle(Event event) 
             {
-                
-                
-                
-                DrawSmth drow_obj = new DrawSmth(gc);
-                
-                //drow_obj.draw(gc, x1, y1, 0, 99, Color);
-                
-                //здесь будет вызов интерпретатора.....
-
-                
+          
+                //здесь будет вызов интерпретатора.....      
 
             }
         });

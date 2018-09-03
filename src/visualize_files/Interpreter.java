@@ -6,15 +6,8 @@
 package visualize_files;
 
 import java.io.*;
-import java.util.concurrent.Semaphore;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javafx.scene.paint.Color;
 import javax.swing.JFileChooser;
-
-
-
 
 
 
@@ -42,6 +35,9 @@ class Interpreter implements Runnable
     static double y1 = 0;
     static double angle = 0;
     static double length = 0;
+    static int depth_of_rec = 2;
+    static int length_divider = 2;
+    static int rad_angle = 1;
 
 
     @Override
@@ -50,7 +46,7 @@ class Interpreter implements Runnable
         GetByte();  
     }
     
-    synchronized void  GetByte ()
+    void  GetByte ()
     {
 
         JFileChooser fileopen = new JFileChooser();
@@ -69,6 +65,7 @@ class Interpreter implements Runnable
                 int r = 255;
                 int g = 255;
                 int b = 255;
+                
 
                 do 
                 {
@@ -78,64 +75,88 @@ class Interpreter implements Runnable
 
                     if (temp != -1)
                     {
-
-                    
-
-                        //logic of interpretation
                         
-                        
+                        System.out.println(temp + " " );
+
+                        //получаем хэш байта
+                                   
                         ByteHash bh = new ByteHash();
                         
                         hash = bh.byte_hash(temp);
                         
                         //получаем цвет
                         
-                        r = Math.abs(hash[(int)Math.round(Math.random()*31)]);
-                        g = Math.abs(hash[(int)Math.round(Math.random()*31)]);
-                        b = Math.abs(hash[(int)Math.round(Math.random()*31)]);
+                        r = Math.abs(hash[4]);//(int)Math.round(Math.random()*31)]);
+                        g = Math.abs(hash[8]);//(int)Math.round(Math.random()*31)]);
+                        b = Math.abs(hash[15]);//(int)Math.round(Math.random()*31)]);
                         
-                        System.out.println("R " + r);
-                        System.out.println("G " + g);
-                        System.out.println("B " + r);
+                        
+                        //System.out.println("R " + r);
+                        //System.out.println("G " + g);
+                        //System.out.println("B " + r);
                         
                         color = Color.rgb (r, g, b);
                         
                         //получаем координаты
                         
-                        x1 = Math.abs((hash[0] * 3.92)/1);
-                        y1 = Math.abs((hash[1] * 3.92)/1);
+                        x1 = Math.abs((hash[0] * 3.92));
+                        y1 = Math.abs((hash[1] * 3.92));
                         
-                        //получаем угол
+                        //получаем угол поворота фигуры
                         
-                        angle = hash[2] / 100;
+                        angle = hash[2];
                         
                         //получаем длину 
                         
-                        length = Math.abs(hash[3] / 7); 
+                        length = Math.abs(hash[3] / 4); 
+                        
+                        //получаем глубину рекурсии
+                        
+                        if(hash[5]%2 != 0)
+                        {
+                            depth_of_rec = 2;
+                        }
+                        else 
+                        {
+                            depth_of_rec = 1;
+                        }
+                        
+                        if(hash[31] > 69)
+                        {
+                            depth_of_rec = 0;
+                        }
+                        
+                        //получаем коэффициент изменения длины линии
+                        
+                                               
+                        if(hash[6]%2 != 0)
+                        {
+                            length_divider = 2;
+                        }
+                        else 
+                        {
+                            length_divider = 3;
+                        }
+                        
+                        
+                        
+                        //получаем коэффициент изменения угла внутри фигуры
+                        
+                        if(length_divider == 3)
+                        {
+                            rad_angle = 3;
+                        }
+                        else 
+                        {
+                            rad_angle = 1;
+                        }
 
- 
 
-
-                        System.out.println(temp + " " );
                         
                         //вызов метода передающего параметры 
-                        
-                        
-                        //System.out.println("Notifying in interpreter");
+
 
                         monitor.get_params();
-                        
-                        //notify();
-                        
-                        /*try 
-                        {
-                            System.out.println("Waiting in interpreter");
-                            wait();
-                        } 
-                        catch (InterruptedException ex) 
-                        {
-                            Logger.getLogger(Interpreter.class.getName()).log(Level.SEVERE, null, ex);
-                        }*/
                         
                     }
 
