@@ -24,7 +24,6 @@ public class Visualize_files extends Application
     static GraphicsContext gc;
     double canvas_w = 500;
     double canvas_h = 500;
-    double x1 = canvas_w-400, x2 = canvas_w-400, y1 = canvas_h-400, y2 = canvas_h-400;
     int i = 0;
     
     @Override
@@ -36,15 +35,16 @@ public class Visualize_files extends Application
         Button clear_btn = new Button();
         clear_btn.setText("Clear plate");
         
+        /*
         Button chg_depth_btn = new Button();
         chg_depth_btn.setText("Set depth");
         
         TextField chg_depth_tf = new TextField();
+        */
         
         
         
-        
-        chg_depth_btn.setOnAction(new EventHandler<ActionEvent>() 
+        /*chg_depth_btn.setOnAction(new EventHandler<ActionEvent>() 
         {
             
             @Override
@@ -61,6 +61,7 @@ public class Visualize_files extends Application
                 
             }
         });
+        */
         
         clear_btn.setOnAction(new EventHandler<ActionEvent>() 
         {
@@ -68,13 +69,7 @@ public class Visualize_files extends Application
             @Override
             public void handle(ActionEvent event) 
             {
-                gc.clearRect(0,0, canvas_w,canvas_h);
-                
-                
-                x1 = x2 = canvas_w-400;
-                y1 = y2 = canvas_h-400;
-                
-                
+                gc.clearRect(0,0, canvas_w,canvas_h);             
                 
                 System.out.println("In handle of clear button");
             
@@ -128,7 +123,7 @@ public class Visualize_files extends Application
         
 
         
-        root.getChildren().addAll(vizual_canvas, btn, clear_btn, chg_depth_btn,chg_depth_tf);
+        root.getChildren().addAll(vizual_canvas, btn, clear_btn/*, chg_depth_btn,chg_depth_tf*/);
     
 
         primaryStage.show();

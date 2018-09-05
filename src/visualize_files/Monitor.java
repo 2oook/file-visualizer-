@@ -15,24 +15,24 @@ import javafx.scene.paint.Color;
  */
 public class Monitor {
     
-    static private Color color = Color.DEEPPINK;
-    static private double x1 = 0;
-    static private double y1 = 0;
-    static private double angle = 0;
-    static private double length = 0;
-    static private int depth_of_rec = 1;
-    static private int length_divider = 3;
-    static private int rad_angle = 3;
+    //критическая область (переменные совместно используемые двумя потоками)
+    static private Color color = Color.DEEPPINK;    //инициализация цвета
+    static private double x1 = 0;                   //инициализация первой координаты отрезка
+    static private double y1 = 0;                   //инициализация первой координаты отрезка
+    static private double angle = 0;                //инициализация угла поворота фигуры
+    static private double length = 0;               //инициализация длины отрезка фигуры
+    static private int depth_of_rec = 1;            //инициализация глубины рекурсии
+    static private int length_divider = 3;          //инициализация коэффициента изменения длины линии
+    static private int rad_angle = 3;               //инициализация коэффициент изменения угла отрисовки отрезка
     
-    DrawSmth drow_obj = new DrawSmth(Visualize_files.gc);
+    DrawSmth drow_obj = new DrawSmth(Visualize_files.gc);//создание объекта отрисовки фигуры
     
-    private boolean fields_is_ready = false;
+    private boolean fields_is_ready = false;             //флаг сигнализирующий о готовности переменных к использованию
     
-    synchronized void get_params()
+    synchronized void get_params()//метод управляющий потоком преобразования байтов в переменные используемые для отрисовки фигур
     {
         fields_is_ready = true;
-        System.out.println("Notifying in get_params");
-        notify();
+        
         
         color = Interpreter.color;
         x1 = Interpreter.x1;
@@ -42,11 +42,13 @@ public class Monitor {
         depth_of_rec = Interpreter.depth_of_rec;
         length_divider = Interpreter.length_divider;
         rad_angle = Interpreter.rad_angle;
+       
+        System.out.println("Notifying in get_params");
+        notify();//уведомить поток отрисовки фигур о том, что аргументы готовы
         
-        
-        while(fields_is_ready)
+        while(fields_is_ready)//ждать пока не потребуются еще аргументы
         {
-            try 
+            try  
             {
                 System.out.println("Waiting in get_params");
                 wait();
@@ -60,9 +62,9 @@ public class Monitor {
         
     }
     
-    synchronized void visualize_bytes()
+    synchronized void visualize_bytes()//метод управляющий потоком отрисовки фигур
     {
-            while(!fields_is_ready)
+            while(!fields_is_ready)//ждать пока не будут готовы аргументы
             {
                 try 
                 {
@@ -80,7 +82,7 @@ public class Monitor {
             drow_obj.draw(x1, y1, angle, length, color, depth_of_rec, length_divider, rad_angle);
             
             System.out.println("Notifying visualize_bytes");
-            notify();
+            notify();//уведомить поток интерпретатор о том, что требуются еще аргументы
 
     }
 

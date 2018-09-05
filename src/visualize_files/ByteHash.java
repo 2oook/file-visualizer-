@@ -18,13 +18,11 @@ import javax.xml.bind.DatatypeConverter;
  */
 public class ByteHash 
 {
-    byte[] byte_hash(int b)
+    byte[] byte_hash(int b)//метод возвращающий хэш SHA-256 в виде массива 32 байтов
     {
         byte[] hash = {};
         byte[] in = {(byte)b};
         String s  = "";
-        
-        
         
         try 
         {

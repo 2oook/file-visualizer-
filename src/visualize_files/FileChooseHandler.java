@@ -16,9 +16,9 @@ public class FileChooseHandler implements Runnable
     
     FileChooseHandler(Monitor monitor)
     {
-        Thread fch_thread = new Thread(this);    
-        fch_thread.start();
-        this.monitor = monitor;
+        Thread fch_thread = new Thread(this); //создаём новый поток    
+        fch_thread.start();                   //запускаем поток
+        this.monitor = monitor;               //инициализация монитора
     }
     
     @Override
@@ -29,15 +29,12 @@ public class FileChooseHandler implements Runnable
     
     void handle_file()
     {
-
-        int i= 1000000;
-        do
+        while(true)
         {
             
             monitor.visualize_bytes();
+            System.out.println("Drawing in FCH");
             
         }
-        while(--i > 0);
-
     }
 }

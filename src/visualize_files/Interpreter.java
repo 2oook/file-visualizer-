@@ -10,8 +10,6 @@ import javafx.scene.paint.Color;
 import javax.swing.JFileChooser;
 
 
-
-
 /**
  *
  * @author 2oook
@@ -99,8 +97,8 @@ class Interpreter implements Runnable
                         
                         //получаем координаты
                         
-                        x1 = Math.abs((hash[0] * 3.92));
-                        y1 = Math.abs((hash[1] * 3.92));
+                        x1 = Math.abs((hash[16] * 3.92));
+                        y1 = Math.abs((hash[23] * 3.92));
                         
                         //получаем угол поворота фигуры
                         
@@ -136,9 +134,7 @@ class Interpreter implements Runnable
                         else 
                         {
                             length_divider = 3;
-                        }
-                        
-                        
+                        } 
                         
                         //получаем коэффициент изменения угла внутри фигуры
                         
@@ -150,9 +146,7 @@ class Interpreter implements Runnable
                         {
                             rad_angle = 1;
                         }
-
-
-                        
+                 
                         //вызов метода передающего параметры 
 
 
@@ -168,10 +162,8 @@ class Interpreter implements Runnable
             catch (IOException e1) 
             {
                 System.out.println("Can not read file");
-            }
-            
+            } 
         }
     }  
-
 }
 
