@@ -29,10 +29,10 @@ public class Visualize_files extends Application
     @Override
     public synchronized void start(Stage primaryStage) {
         
-        Button btn = new Button();
+        Button btn = new Button();//кнопка выбора файла
         btn.setText("Choose file");
         
-        Button clear_btn = new Button();
+        Button clear_btn = new Button();//кнопка очистки экрана
         clear_btn.setText("Clear plate");
         
         /*
@@ -50,7 +50,6 @@ public class Visualize_files extends Application
             @Override
             public void handle(ActionEvent event) 
             {
-                //if(chg_depth_tf.getText())
                     
                 int p = Integer.parseInt(chg_depth_tf.getText());
 
@@ -63,7 +62,7 @@ public class Visualize_files extends Application
         });
         */
         
-        clear_btn.setOnAction(new EventHandler<ActionEvent>() 
+        clear_btn.setOnAction(new EventHandler<ActionEvent>() //обработчик очистки экрана
         {
             
             @Override
@@ -76,7 +75,7 @@ public class Visualize_files extends Application
             }
         });
         
-        btn.setOnAction(new EventHandler<ActionEvent>() 
+        btn.setOnAction(new EventHandler<ActionEvent>() //обработчик выбора файла
         {
             
             @Override
@@ -94,7 +93,7 @@ public class Visualize_files extends Application
         
         FlowPane root = new FlowPane(10,10);
         root.setAlignment(Pos.CENTER);
-        //root.setBackground(Background.EMPTY);
+        
         Scene scene = new Scene(root, 500, 600);
         
         primaryStage.setTitle("Visualize your file");
@@ -109,18 +108,16 @@ public class Visualize_files extends Application
         
        
         
-        
+        /*
         vizual_canvas.setOnScroll(new EventHandler() 
         {       
             @Override
             public void handle(Event event) 
-            {
-          
-                //здесь будет вызов интерпретатора.....      
+            {    
 
             }
         });
-        
+        */
 
         
         root.getChildren().addAll(vizual_canvas, btn, clear_btn/*, chg_depth_btn,chg_depth_tf*/);

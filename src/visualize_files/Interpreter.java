@@ -49,7 +49,7 @@ class Interpreter implements Runnable
 
         JFileChooser fileopen = new JFileChooser();
         
-        fileopen.setCurrentDirectory(new File("."));
+        fileopen.setCurrentDirectory(new File("."));//выбрать файл (с текущего каталога)
         int ret = fileopen.showDialog(null, "Открыть файл");
 
         if (ret == JFileChooser.APPROVE_OPTION) 
